@@ -225,49 +225,50 @@ public class BluetoothSerial {
 	public int available() throws IOException{
 		if (connected)
 			return serialInputStream.available();
-		
-		throw new RuntimeException("Connection lost, reconnecting now.");
+		else
+			throw new RuntimeException("Connection lost");
 	}
 	
 	public int read() throws IOException{
 		if (connected)
 			return serialInputStream.read();
-		
-		throw new RuntimeException("Connection lost, reconnecting now.");
+		else
+			throw new RuntimeException("Connection lost");
 	}
 	
 	public int read(byte[] buffer) throws IOException{
 		if (connected)
 			return serialInputStream.read(buffer);
-		
-		throw new RuntimeException("Connection lost, reconnecting now.");
+		else
+			throw new RuntimeException("Connection lost");
 	}
 	
 	public int read(byte[] buffer, int byteOffset, int byteCount) throws IOException{
 		if (connected)
 			return serialInputStream.read(buffer, byteOffset, byteCount);
-		
-		throw new RuntimeException("Connection lost, reconnecting now.");
+		else
+			throw new RuntimeException("Connection lost");
 	}
 
 	public void write(byte[] buffer) throws IOException{
 		if (connected)
 			serialOutputStream.write(buffer);
-		
-		throw new RuntimeException("Connection lost, reconnecting now.");
+		else
+			throw new RuntimeException("Connection lost");
 	}
 	
 	public void write(int oneByte) throws IOException{
 		if (connected)
 			serialOutputStream.write(oneByte);
-		
-		throw new RuntimeException("Connection lost, reconnecting now.");
+		else
+			throw new RuntimeException("Connection lost");
 	}
 	
 	public void write(byte[] buffer, int offset, int count) throws IOException {
-		serialOutputStream.write(buffer, offset, count);
-		
-		throw new RuntimeException("Connection lost, reconnecting now.");
+		if(connected)
+			serialOutputStream.write(buffer, offset, count);
+		else
+			throw new RuntimeException("Connection lost");
 	}
 	
 	private class SerialReader extends Thread {
